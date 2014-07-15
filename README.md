@@ -1,12 +1,25 @@
 TaskQuest
 ----------
 
+
  * RPG風タスク管理ツールです。
  * 使い方はTrelloみたいな感じですが、スクラム開発向けに最適化してあります。
  * Chrome, FireFoxで動作を確認しています。
+ * タスク完了時に、DevHubに通知を送信することが出来ます。
 
 ![screenshot](screenshot.png)
 
+
+DEMO
+-------
+
+http://taskquest-sample.herokuapp.com/#/Sample
+
+制限
+------
+
+ * タスクのソートには対応しておりません。
+ * タスクの区分けは固定です。
 
 インストール
 ----------
