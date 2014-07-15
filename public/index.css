@@ -1,0 +1,85 @@
+section.line {
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    background: #fafafa;
+    margin-right: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: move;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.headerBar{
+    width: 100%;
+    height: 70px;
+}
+
+select.board > option {
+    color: black;
+}
+
+select.board {
+    color: #FFFFFF;
+    font-size: 2.5rem !important;
+    height: 4rem;
+    margin: 5px;
+    background: rgba(255, 255, 255, 0) no-repeat right;
+    border: solid 2px rgba(255, 255, 255, 0.7);
+}
+
+span.user{
+    color: #FFFFFF;
+    background: rgb(175, 167, 167);
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1rem;
+    font-weight: bolder;
+    word-break: normal;
+}
+
+span.userme{
+    background: rgb(114, 202, 114)
+}
+
+input {
+    padding: 3px;
+    width: 98%;
+}
+section.line header {
+    padding: 5px;
+    background-color: #dbdbdb;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: bolder;
+}
+article.card {
+    background: #FFF;
+    margin: 2px 5px 2px 5px;
+    text-align: left;
+    border-radius: 3px;
+    padding: 9px;
+    word-break:break-all;
+    /* box-shadow */
+    box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
+    -webkit-box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
+    -moz-box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
+}
+.cardlist {
+    border: 2px solid #dbdbdb;
+    background: #dbdbdb;
+    min-height: 200px;
+}
+
+body {
+    background: rgb(35, 113, 159);
+    background: url("images/background.png");
+}
+form {
+    margin: 0;
+}

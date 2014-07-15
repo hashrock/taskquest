@@ -1,0 +1,28 @@
+{
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "evil": false,
+  "forin": true,
+  "immed": true,
+  "latedef": true,
+  "maxdepth": 5,
+  "maxparams": 5,
+  "maxlen": 120,
+  "trailing" : true,
+  "undef": true,
+  "unused": true,
+  "node": true,
+  "jquery": true,
+  "browser" : true,
+  "globals": {
+    "describe" : false,
+    "it": false,
+    "before": false,
+    "after": false,
+    "define": false,
+    "angular": false,
+    "prompt": false,
+    "_": false
+  }
+}
