@@ -58,7 +58,13 @@ function compose(items, status) {
 
 function postDevHub(ticket, id) {
     if (ticket.status === "done" && process.env.DEVHUB) {
-        var message = ticket.user + " は " + ticket.name + " をたおした。 [" + id + "](" + process.env.HOST + "/#/" + id + ")";
+        //タグ文字対策
+        var tname = ticket.name;
+        tname.replace(/\[/g, "");
+        tname.replace(/\]/g, " ");
+
+        //Devhubに送信
+        var message = ticket.user + " は " + tname + " をたおした。 [" + id + "](" + process.env.HOST + "/#/" + id + ")";
         var name = "taskquest";
         var url = process.env.DEVHUB + "/notify?name=" + encodeURIComponent(name) + 
         "&msg=" + encodeURIComponent(message);
