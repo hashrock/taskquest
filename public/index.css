@@ -43,6 +43,16 @@ span.user{
     word-break: normal;
 }
 
+span.tag{
+    color: #FFFFFF;
+    background: rgb(112, 187, 211);
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1rem;
+    font-weight: bolder;
+    word-break: normal;
+}
+
 span.userme{
     background: rgb(114, 202, 114)
 }

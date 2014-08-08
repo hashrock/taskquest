@@ -1,4 +1,18 @@
-var myapp = angular.module('myapp', ['ui', 'ui.bootstrap', 'ui.sortable']);
+var myapp = angular.module('myapp', ['ui', 'ui.bootstrap', 'ui.sortable'])
+        .filter('removeTag', function() {
+            return function(input) {
+                return input.replace(/\[[^\]]*\]/g, "");
+            };
+        })
+        .filter('findTag', function() {
+            return function(input) {
+                var matches = input.match(/\[[^\]]*\]/g);
+                if(matches){
+                    return matches.map(function(item){return item.replace(/[\[\]]/g,"");});
+                }
+                return [];
+            };
+        });
 
 function getStatusMap() {
     return [{
