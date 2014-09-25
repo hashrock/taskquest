@@ -1,17 +1,4 @@
-## Directory-based project format
-.idea/workspace.xml
-.idea/tasks.xml
-# and these sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-
-## File-based project format
-*.ipr
-*.iml
-*.iws
-
+.idea/
 node_modules/
 data/
 .env
