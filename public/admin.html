@@ -10,7 +10,6 @@
     <script type="text/javascript" src="javascripts/angular.min.js"></script>
     <script type="text/javascript" src="javascripts/angular-ui.min.js"></script>
     <script src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
-    <script type="text/javascript" src="javascripts/sortable.js"></script>
 
     <title>TaskQuest</title>
 </head>
@@ -21,11 +20,32 @@
         <ul ng-repeat="board in boardList">
             <li>{{board.name}} | {{board._id}}  <button ng-click="deleteBoard(board)">Delete</button></li>
         </ul>
-        <div class="row">
 
+
+        <h3>Tickets</h3>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>User</th>
+                        <th>Status</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="ticket in ticketList">
+                    <td>{{ticket.name}}</td>
+                    <td>{{ticket.user}}</td>
+                    <td>{{ticket.status}}</td>
+                    <td>{{ticket.createdAt | date:'yyyy-MM-dd'}}</td>
+                    <td>{{ticket.updatedAt | date:'yyyy-MM-dd'}}</td>
+                    <td><button>Archive</button><button>Delete</button></td>
+                </tr>
+            </table>
         </div>
     </div>
-    <script src="index.js">
+    <script src="admin.js">
     </script>
 
 </body>

@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URL + '/taskquest'); // connect to our data
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var boards = require('./routes/boards');
+var tickets = require('./routes/tickets');
 
 
 var app = express();
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/boards', boards);
+app.use('/tickets', tickets);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
