@@ -68,7 +68,12 @@ function postDevHub(ticket, id) {
         var name = "taskquest";
         var url = process.env.DEVHUB + "/notify?name=" + encodeURIComponent(name) + 
         "&msg=" + encodeURIComponent(message);
-        http.get(url, function() {});
+        http.get(url, function(res) {
+            console.log("Devhub response:" + res.statusCode);
+        }).on("error", function(e){
+            console.log("Devhub console error:" + e.message);
+        });
+
     }
 }
 
