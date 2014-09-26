@@ -40,7 +40,7 @@
                     <td>{{ticket.status}}</td>
                     <td>{{ticket.createdAt | date:'yyyy-MM-dd'}}</td>
                     <td>{{ticket.updatedAt | date:'yyyy-MM-dd'}}</td>
-                    <td><button>Archive</button><button>Delete</button></td>
+                    <td><button ng-click="archiveCard(ticket)">Archive</button><button ng-click="deleteCard(ticket)">Delete</button></td>
                 </tr>
             </table>
         </div>

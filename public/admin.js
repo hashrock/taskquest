@@ -32,8 +32,10 @@ var TaskCtrl = function($scope, $http) {
         });
     };
 
-    $scope.deleteCard = function(){
-
+    $scope.deleteCard = function(card){
+        $http.delete("/tickets/" + card._id).success(function() {
+            reloadTickets();
+        });
     };
 
 
