@@ -9,6 +9,10 @@ var TaskCtrl = function($scope, $http) {
         });
     }
 
+    //ready
     reloadTickets();
+
+
+
 };
 myapp.controller('controller', TaskCtrl);

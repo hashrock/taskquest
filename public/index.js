@@ -72,6 +72,11 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
 
     function loadTickets() {
         if ($scope.selectedBoard) {
+            $http.get("/logs/").success(function(data){
+                $scope.logList = data;
+            });
+
+
             $http.get("/boards/" + $scope.selectedBoard.name).success(function(result) {
                 $scope.linesAry = [
                     [{
