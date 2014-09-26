@@ -1,6 +1,6 @@
-var myapp = angular.module('myapp', ['ui', 'ui.bootstrap']);
+var myapp = angular.module('myapp', ['ui', 'ui.bootstrap', 'ui.sortable']);
 
-var TaskCtrl = function($scope, $http, $location, $q) {
+var TaskCtrl = function($scope, $http) {
     function reloadBoards() {
         $http.get("/boards/").success(function(data) {
             $scope.boardList = data;
@@ -13,20 +13,10 @@ var TaskCtrl = function($scope, $http, $location, $q) {
         });
     }
 
-
+    //ready
     reloadTickets();
     reloadBoards();
 
-    $scope.newBoard = function() {
-        var boardName = prompt("New Board Name");
-        if (boardName) {
-            $http.post("/boards/", {
-                name: boardName
-            }).success(function() {
-                reloadBoards();
-            });
-        }
-    };
 
     $scope.deleteBoard = function(board) {
         $http.delete("/boards/" + board._id).success(function() {
@@ -34,28 +24,18 @@ var TaskCtrl = function($scope, $http, $location, $q) {
         });
     };
 
-    $scope.addCard = function(line, addObj) {
-        if (!addObj || addObj.name.trim().length === 0) {
-            return;
-        }
-        var item = {
-            name: addObj.name,
-            icon: "slime",
-            status: line.status,
-            user: localStorage.user,
-            board: $scope.selectedBoard._id
-        };
-
-        $http.post("/boards/" + $scope.selectedBoard.name + "/tickets/", item).success(function() {
-            line.cards.unshift();
-            addObj.name = "";
-            loadTickets();
-
-            return false;
+    $scope.archiveCard = function(card){
+        $http.put("/tickets/" + card._id , {
+            status: "archive"
+        }).success(function(){
+            reloadTickets();
         });
     };
-    
-    var oldList, newList, item;
+
+    $scope.deleteCard = function(){
+
+    };
+
 
 };
 myapp.controller('controller', TaskCtrl);

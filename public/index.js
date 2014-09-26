@@ -184,14 +184,14 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         });
         modalInstance.result.then(function(selectedItem) {
             if (selectedItem === "delete") {
-                $http.delete("/boards/" + $scope.selectedBoard.name + "/tickets/" + card._id).success(function() {
+                $http.delete("/tickets/" + card._id).success(function() {
                     loadTickets();
                 });
             } else if (selectedItem === "cancel") {
                 //card = backupCard;
             } else {
                 card = selectedItem;
-                $http.put("/boards/" + $scope.selectedBoard.name + "/tickets/" + card._id, card).success(function() {
+                $http.put("/tickets/" + card._id, card).success(function() {
                     console.log("Updated");
                     loadTickets();
                 });
@@ -199,11 +199,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
 
         }, function() {});
     };
-    $scope.deleteBoard = function(board) {
-        $http.delete("/boards/" + board._id).success(function() {
-            reloadBoards();
-        });
-    };
+
 
     $scope.addCard = function(line, addObj) {
         if (!addObj || addObj.name.trim().length === 0) {
@@ -217,7 +213,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             board: $scope.selectedBoard._id
         };
 
-        $http.post("/boards/" + $scope.selectedBoard.name + "/tickets/", item).success(function() {
+        $http.post("/tickets/", item).success(function() {
             line.cards.unshift();
             addObj.name = "";
             loadTickets();
@@ -244,7 +240,8 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             var toList = newList.attr("data-status");
             if(fromList !== toList){
                 var itemId = item.attr("data-id");
-                $http.put("/boards/" + $scope.selectedBoard.name + "/tickets/" + itemId, {
+
+                $http.put("/tickets/" + itemId, {
                     status: toList
                 }).success(function(){
                     loadBadges();
