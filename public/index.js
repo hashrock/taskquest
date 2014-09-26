@@ -60,6 +60,8 @@ var ModalInstanceCtrl = function($scope, $modalInstance, card) {
 };
 
 var TaskCtrl = function($scope, $http, $location, $modal, $q) {
+    var oldList, newList, item;
+
     if (!localStorage.user) {
         localStorage.user = prompt("ユーザ名を入力して下さい。");
     }
@@ -221,7 +223,6 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         });
     };
     
-    var oldList, newList, item;
     $scope.sortableOptions = {
         helper : 'clone', //Prevent extra click event in FF
         connectWith: ".apps-container",

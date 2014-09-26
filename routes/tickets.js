@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Ticket = require('../models/ticket');
+var Log = require('../models/log');
 var http = require('http');
 
 function postDevHub(ticket, id) {
@@ -77,11 +78,9 @@ router.put('/:tid', function(req, res) {
         ticket.icon = req.body.icon ? req.body.icon : ticket.icon;
 
 
-        console.log("Updated");
         res.json({
             message: "Updated."
         });
-
 
         ticket.save(function(err) {
             if (err) {
@@ -90,6 +89,21 @@ router.put('/:tid', function(req, res) {
             if(process.env.DEVHUB){
                 postDevHub(ticket, req.params.id);
             }
+
+            var log = new Log();
+            log.name = ticket.name;
+            log.user = ticket.user;
+            log.status = ticket.status;
+            log.memo = ticket.memo;
+            log.sprint = ticket.sprint;
+            log.icon = ticket.icon;
+            log.save(function(err){
+                if(err){
+                    res.send(err);
+                }
+            });
+
+
         });
     });
 });

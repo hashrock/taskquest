@@ -1,3 +1,4 @@
+
 section.line {
     margin-bottom: 20px;
     width: 100%;
@@ -89,7 +90,9 @@ article.card {
 body {
     background: rgb(35, 113, 159);
     background: url("images/background.png");
+
 }
+
 form {
     margin: 0;
 }

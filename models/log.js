@@ -3,7 +3,7 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var TicketSchema = new Schema({
+var LogSchema = new Schema({
     name: String,
     user: String,
     status: String,
@@ -12,5 +12,5 @@ var TicketSchema = new Schema({
     board: ObjectId,
     icon: String
 });
-TicketSchema.plugin(timestamps);
-module.exports = mongoose.model('Ticket', TicketSchema);
+LogSchema.plugin(timestamps);
+module.exports = mongoose.model('Log', LogSchema);
