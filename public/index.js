@@ -147,7 +147,6 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     $scope.$watch("selectedBoard", function() {
         if ($scope.selectedBoard) {
             loadTickets();
-            console.log($scope.selectedBoard);
             $location.path("/" + $scope.selectedBoard.name);
         }
     });
