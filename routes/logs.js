@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
             res.send(err);
         }
         res.json(ticket);
-    });
+    }).limit(10);
 });
 
 
