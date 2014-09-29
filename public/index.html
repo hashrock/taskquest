@@ -19,45 +19,49 @@
 
 <!-- Fixed navbar -->
 <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <img src="images/alert_none.png" alt=""/>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="log in logList"><a href="#">
+                            {{log.createdAt | date:'yyyy-MM-dd HH:mm'}} {{log.user}}が{{log.name}}を{{log.status}}に変更した。
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <select class="board" style="font-size: 1.5rem; width: 200px" ng-model="selectedBoard" ng-options="board.name for board in boardList">
+                    </select>
+                </li>
+
+                <li><a href="#" ng-click="newBoard()">New Board</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin.html">Setting</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                <select class="board" style="font-size: 1.5rem; width: 200px" ng-model="selectedBoard" ng-options="board.name for board in boardList">
-                </select>
-            </li>
-
-            <li><a href="#" ng-click="newBoard()">New Board</a></li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Log<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li ng-repeat="log in logList"><a href="#">
-                        {{log.createdAt | date:'yyyy-MM-dd HH:mm'}} {{log.user}}が{{log.name}}を{{log.status}}に変更した。
-                    </a>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="/admin.html">Setting</a></li>
-        </ul>
-
-    </div><!--/.nav-collapse -->
 </div>
 
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="teamStatus">
-                    <h5 style="color:white">今週の作業一覧</h5>
+                    <h5 style="color:white; margin-top: 0px;">This week</h5>
 
                     <span ng-repeat="user in userList">
                         <span class="user">{{user.user}}</span>

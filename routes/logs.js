@@ -6,12 +6,14 @@ var http = require('http');
 
 
 router.get('/', function(req, res) {
-    Log.find({}, function(err, ticket) {
-        if (err) {
-            res.send(err);
-        }
-        res.json(ticket);
-    }).limit(10);
+    Log.find({})
+        .limit(10)
+        .exec(function(err, ticket) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(ticket);
+        });
 });
 
 

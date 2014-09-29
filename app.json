@@ -1,0 +1,9 @@
+{
+    "name": "taskquest",
+    "description": "Simple Kanban tool.",
+    "repository": "https://github.com/hashrock/taskquest",
+    "keywords": ["node", "kanban"],
+    "addons": [
+        "mongolab"
+    ]
+}
