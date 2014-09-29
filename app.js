@@ -9,7 +9,9 @@ var dotenv = require('dotenv');
 dotenv.load();
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URL + '/taskquest'); // connect to our database
+
+var mongodb_uri = process.env.MONGODB_URL ? process.env.MONGODB_URL : process.env.MONGOLAB_URI;
+mongoose.connect(mongodb_uri + '/taskquest');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
