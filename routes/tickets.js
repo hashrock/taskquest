@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var Ticket = require('../models/ticket');
+var Board = require('../models/board');
 var Log = require('../models/log');
 var http = require('http');
+
 
 function postDevHub(ticket, id) {
     if (ticket.status === "done" && process.env.DEVHUB) {
@@ -87,7 +89,9 @@ router.put('/:tid', function(req, res) {
                 res.send(err);
             }
             if(process.env.DEVHUB){
-                postDevHub(ticket, req.params.id);
+		Board.findById(ticket.board, function(err, board){
+                	postDevHub(ticket, board.name);
+		})
             }
 
             var log = new Log();
