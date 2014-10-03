@@ -10,8 +10,8 @@ function postDevHub(ticket, id) {
     if (ticket.status === "done" && process.env.DEVHUB) {
         //タグ文字対策
         var tname = ticket.name;
-        tname.replace(/\[/g, "");
-        tname.replace(/\]/g, " ");
+        tname = tname.replace("[", "");
+        tname = tname.replace("]", " ");
 
         //Devhubに送信
         var message = ticket.user + " は " + tname + " をたおした。 [" + id + "](" + process.env.HOST + "/#/" + id + ")";
