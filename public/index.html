@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="teamStatus">
-                    <h5 style="color:white; margin-top: 0px;">This week</h5>
+                    <div id="calendar"></div>
 
                     <span ng-repeat="user in userList">
                         <span class="user">{{user.user}}</span>
@@ -100,6 +100,7 @@
         </div>
 
     </div>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="index.js">
     </script>
     <script type="text/ng-template" id="myModalContent.html">

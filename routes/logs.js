@@ -6,8 +6,20 @@ var http = require('http');
 
 
 router.get('/', function(req, res) {
-    Log.find({})
-        .limit(10)
+    var limit = req.param("limit") ? req.param("limit") : 100;
+    var user = req.param("user");
+    var status =  req.param("status");
+
+    var cond = {};
+    if(user){
+        cond.user = user;
+    }
+    if(status){
+        cond.status = status;
+    }
+
+    Log.find(cond)
+        .limit(limit)
         .exec(function(err, ticket) {
             if (err) {
                 res.send(err);
