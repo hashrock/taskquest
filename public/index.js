@@ -227,7 +227,31 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             return false;
         });
     };
-    
+
+    function archiveCard(card){
+        var deferred = $q.defer();
+
+        $http.put("/tickets/" + card._id , {
+            status: "archive"
+        }).success(function(){
+            return deferred.resolve({result: "success"});
+        });
+        return deferred.promise;
+    }
+
+    $scope.archiveCards = function(cards){
+        if(window.confirm('クリアしてよろしいですか？')){
+            var promises = cards.map(function(card){
+                return archiveCard(card);
+            });
+
+            $q.all(promises).then(function(){
+                loadTickets();
+                reloadTickets();
+            });
+        }
+    };
+
     $scope.sortableOptions = {
         helper : 'clone', //Prevent extra click event in FF
         connectWith: ".apps-container",
@@ -270,8 +294,8 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         format = d3.time.format("%Y-%m-%d");
 
     var color = d3.scale.quantize()
-        .domain([10, 0])
-        .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+        .domain([0, 4])
+        .range(d3.range(4).map(function(d) { return "q" + d + "-11"; }));
 
     var thisYear = new Date().getFullYear();
     var svg = d3.select("#calendar").selectAll("svg")
@@ -282,11 +306,6 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         .attr("class", "RdYlGn")
         .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
-
-    svg.append("text")
-        .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
-        .style("text-anchor", "middle")
-        .text(function(d) { return d; });
 
     var rect = svg.selectAll(".calender-day")
         .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
@@ -307,11 +326,10 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         .attr("class", "calender-month")
         .attr("d", monthPath);
 
-    function updateCalendar(ticketList){
-        console.log(ticketList);
+    function updateCalendar(logList){
         var data = {};
 
-        ticketList.forEach(function(item){
+        logList.forEach(function(item){
             var createdAt = format(new Date(item.createdAt));
             data[createdAt] = data[createdAt] ? data[createdAt]+1 : 1;
         });
@@ -334,15 +352,18 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             + "H" + (w0 + 1) * cellSize + "Z";
     }
 
-    function reloadTickets(){
-        $http.get("/logs/?status=done&user=" + localStorage.user).success(function(data){
-            $scope.ticketList = data;
+    function reloadLogs(){
+        $http.get("/logs/?status=done&limit=1000&user=" + localStorage.user).success(function(data){
+            $scope.logList = data;
             updateCalendar(data);
+        });
+        $http.get("/logs/?limit=20").success(function(data){
+            $scope.recentlogList = data;
         });
     }
 
     //ready
-    reloadTickets();
+    reloadLogs();
     // --------------------------------
     // Calender View End
     // --------------------------------

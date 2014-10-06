@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
     }
 
     Log.find(cond)
+        .sort('-updatedAt')
         .limit(limit)
         .exec(function(err, ticket) {
             if (err) {
