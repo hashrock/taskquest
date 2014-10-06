@@ -136,8 +136,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
                     task: obj.data
                 };
             });
-
-        });
+        }).done();
     }
 
 
@@ -248,7 +247,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             $q.all(promises).then(function(){
                 loadTickets();
                 reloadTickets();
-            });
+            }).done();
         }
     };
 
