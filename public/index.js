@@ -177,8 +177,8 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
                 name: boardName
             }).success(function() {
                 reloadBoards();
+                $location.path("/" + boardName);
             });
-
         }
     };
 
