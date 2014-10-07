@@ -238,6 +238,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             addObj.name = "";
             loadTickets();
             loadLogs();
+            loadBadges();
 
             return false;
         });
