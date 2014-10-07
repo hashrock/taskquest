@@ -86,6 +86,7 @@ article.card {
     box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
     -webkit-box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
     -moz-box-shadow: rgba(113, 135, 164, 0.7) 0px 0px 2px 1px;
+    position: relative;
 }
 .cardlist {
     border: 2px solid #dbdbdb;
@@ -96,7 +97,10 @@ article.card {
 .line-btn-archive {
     position: absolute; right:5px;
 }
-
+.line-card-memoicon {
+    position: absolute;
+    right: 4px;
+}
 
 body {
     background: rgb(35, 113, 159);
@@ -138,6 +142,7 @@ form {
 .RdYlGn .q1-11{fill:rgb(166,217,106)}
 .RdYlGn .q2-11{fill:rgb(102,189,99)}
 .RdYlGn .q3-11{fill: rgb(34, 132, 23)}
+
 
 
 /* ------------- Calendar End -------------  */

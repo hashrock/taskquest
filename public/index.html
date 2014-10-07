@@ -97,6 +97,7 @@
                             <div ng-repeat="card in line.cards" data-id="{{card._id}}">
                                 <article class="card" ng-click="openCard(card)">
                                     <img ng-src="images/{{card.icon}}.png"> <span class="tag" ng-repeat="tag in card.name | findTag">{{tag}}</span>  {{card.name | removeTag}} <span class="user" ng-class="{userme: isUserMe(card.user)}">{{card.user}}</span>
+                                    <img ng-if="card.memo" class="line-card-memoicon" ng-src="images/memo.png" alt="comment"/>
                                 </article>
                             </div>
                         </div>
