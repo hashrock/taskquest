@@ -18,9 +18,9 @@ function postDevHub(ticket, id) {
         var name = "taskquest";
         var url = process.env.DEVHUB + "/notify?name=" + encodeURIComponent(name) +
             "&msg=" + encodeURIComponent(message);
-        http.get(url, function(res) {
+        http.get(url, function (res) {
             console.log("Devhub response:" + res.statusCode);
-        }).on("error", function(e){
+        }).on("error", function (e) {
             console.log("Devhub console error:" + e.message);
         });
 
@@ -28,8 +28,8 @@ function postDevHub(ticket, id) {
 }
 
 
-router.get('/', function(req, res) {
-    Ticket.find({}, function(err, ticket) {
+router.get('/', function (req, res) {
+    Ticket.find({}, function (err, ticket) {
         if (err) {
             res.send(err);
         }
@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
     var ticket = new Ticket();
     ticket.name = req.body.name;
     ticket.user = req.body.user;
@@ -46,7 +46,7 @@ router.post('/', function(req, res) {
     ticket.sprint = req.body.sprint;
     ticket.board = req.body.board;
     ticket.icon = "slime";
-    ticket.save(function(err) {
+    ticket.save(function (err) {
         if (err) {
             res.send(err);
         }
@@ -57,8 +57,8 @@ router.post('/', function(req, res) {
 
 });
 
-router.get('/:tid', function(req, res) {
-    Ticket.findById(req.params.tid, function(err, ticket) {
+router.get('/:tid', function (req, res) {
+    Ticket.findById(req.params.tid, function (err, ticket) {
         if (err) {
             res.send(err);
         }
@@ -67,8 +67,8 @@ router.get('/:tid', function(req, res) {
 });
 
 
-router.put('/:tid', function(req, res) {
-    Ticket.findById(req.params.tid, function(err, ticket) {
+router.put('/:tid', function (req, res) {
+    Ticket.findById(req.params.tid, function (err, ticket) {
         if (err) {
             res.send(err);
         }
@@ -84,14 +84,14 @@ router.put('/:tid', function(req, res) {
             message: "Updated."
         });
 
-        ticket.save(function(err) {
+        ticket.save(function (err) {
             if (err) {
                 res.send(err);
             }
-            if(process.env.DEVHUB){
-		Board.findById(ticket.board, function(err, board){
-                	postDevHub(ticket, board.name);
-		})
+            if (process.env.DEVHUB) {
+                Board.findById(ticket.board, function (err, board) {
+                    postDevHub(ticket, board.name);
+                })
             }
 
             var log = new Log();
@@ -101,8 +101,8 @@ router.put('/:tid', function(req, res) {
             log.memo = ticket.memo;
             log.sprint = ticket.sprint;
             log.icon = ticket.icon;
-            log.save(function(err){
-                if(err){
+            log.save(function (err) {
+                if (err) {
                     res.send(err);
                 }
             });
@@ -112,11 +112,11 @@ router.put('/:tid', function(req, res) {
     });
 });
 
-router.delete('/:tid', function(req, res) {
+router.delete('/:tid', function (req, res) {
     Ticket.remove({
             _id: req.params.tid
         },
-        function(err) {
+        function (err) {
             if (err) {
                 res.send(err);
             }
