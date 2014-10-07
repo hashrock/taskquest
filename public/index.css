@@ -33,7 +33,8 @@ select.board > option {
 }
 
 select.board {
-    font-size: 2rem !important;
+    font-size: 2rem;
+    width: 200px
     height: 3rem;
     margin: 5px;
     background: rgba(255, 255, 255, 0) no-repeat right;
