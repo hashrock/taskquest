@@ -136,7 +136,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
                     task: obj.data
                 };
             });
-        }).done();
+        });
     }
 
 
