@@ -10,7 +10,8 @@ var LogSchema = new Schema({
     sprint: Number,
     memo: String,
     board: ObjectId,
-    icon: String
+    icon: String,
+    action: String
 });
 LogSchema.plugin(timestamps);
 module.exports = mongoose.model('Log', LogSchema);

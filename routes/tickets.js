@@ -50,6 +50,21 @@ router.post('/', function (req, res) {
         if (err) {
             res.send(err);
         }
+
+        var log = new Log();
+        log.action = "create";
+        log.name = ticket.name;
+        log.user = ticket.user;
+        log.status = ticket.status;
+        log.memo = ticket.memo;
+        log.sprint = ticket.sprint;
+        log.icon = ticket.icon;
+        log.save(function (err) {
+            if (err) {
+                res.send(err);
+            }
+        });
+
         res.json({
             message: "Saved."
         });
@@ -95,6 +110,7 @@ router.put('/:tid', function (req, res) {
             }
 
             var log = new Log();
+            log.action = "update";
             log.name = ticket.name;
             log.user = ticket.user;
             log.status = ticket.status;

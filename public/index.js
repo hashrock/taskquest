@@ -237,6 +237,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             line.cards.unshift();
             addObj.name = "";
             loadTickets();
+            loadLogs();
 
             return false;
         });
@@ -366,7 +367,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             + "H" + (w0 + 1) * cellSize + "Z";
     }
 
-    function reloadLogs(){
+    function loadLogs(){
         $http.get("/logs/?status=done&limit=1000&user=" + localStorage.user).success(function(data){
             $scope.logList = data;
             updateCalendar(data);
@@ -377,7 +378,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     }
 
     //ready
-    reloadLogs();
+    loadLogs();
     // --------------------------------
     // Calender View End
     // --------------------------------

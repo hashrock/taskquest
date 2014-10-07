@@ -36,7 +36,12 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li ng-repeat="log in recentlogList"><a href="#">
-                            {{log.createdAt | date:'yyyy-MM-dd HH:mm'}} {{log.user}}が{{log.name}}を{{log.status}}に変更した。
+                            <span ng-if="log.action == 'create'">
+                                {{log.createdAt | date:'yyyy-MM-dd HH:mm'}} {{log.user}} が 「{{log.name}}」を{{log.status}}に作成
+                            </span>
+                            <span ng-if="log.action == 'update'">
+                                {{log.createdAt | date:'yyyy-MM-dd HH:mm'}} {{log.user}} が 「{{log.name}}」を{{log.status}}に移動
+                            </span>
                         </a>
                         </li>
                     </ul>
