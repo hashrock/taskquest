@@ -45,7 +45,6 @@ function getStatusMap() {
 var ModalInstanceCtrl = function($scope, $modalInstance, card) {
     $scope.card = card;
     $scope.statusMap = getStatusMap();
-    console.log($scope.statusMap);
     $scope.ok = function() {
         $modalInstance.close(card);
     };
@@ -53,6 +52,12 @@ var ModalInstanceCtrl = function($scope, $modalInstance, card) {
     $scope.delete = function() {
         $modalInstance.close('delete');
     };
+
+    $scope.archive = function () {
+        $modalInstance.close('archive');
+    };
+
+
 
     $scope.cancel = function() {
         $modalInstance.close('cancel');
@@ -188,20 +193,30 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             }
         });
         modalInstance.result.then(function(selectedItem) {
-            if (selectedItem === "delete") {
-                $http.delete("/tickets/" + card._id).success(function() {
-                    loadTickets();
-                });
-            } else if (selectedItem === "cancel") {
-                //card = backupCard;
-            } else {
-                card = selectedItem;
-                $http.put("/tickets/" + card._id, card).success(function() {
-                    console.log("Updated");
-                    loadTickets();
-                });
-            }
+            switch(selectedItem){
+                case "delete" :
+                    $http.delete("/tickets/" + card._id).success(function() {
+                        loadTickets();
+                    });
+                    break;
+                case "archive" :
+                    archiveCard(card)
+                        .then(function(){
+                            loadTickets();
+                        });
+                    break;
 
+                case "cancel":
+                    //card = backupCard;
+                    break;
+
+                default:
+                    card = selectedItem;
+                    $http.put("/tickets/" + card._id, card).success(function() {
+                        console.log("Updated");
+                        loadTickets();
+                    });
+            }
         }, function() {});
     };
 
