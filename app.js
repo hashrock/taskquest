@@ -11,6 +11,8 @@ dotenv.load();
 var mongoose = require('mongoose');
 
 var mongodb_uri = process.env.MONGODB_URL ? process.env.MONGODB_URL : process.env.MONGOLAB_URI;
+mongodb_uri = mongodb_uri ? mongodb_uri : "localhost";
+
 console.log(mongodb_uri + "/taskquest");
 mongoose.connect(mongodb_uri + '/taskquest');
 
