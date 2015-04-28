@@ -13,7 +13,7 @@ TaskQuest
 DEMO
 -------
 
-http://taskquest-sample.herokuapp.com/#/Sample
+http://taskquest-test.herokuapp.com/#/Sample
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
