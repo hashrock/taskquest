@@ -1,3 +1,6 @@
+var AUTO_RELOAD_INTERVALS = 10000;
+
+
 var myapp = angular.module('myapp', ['ui', 'ui.bootstrap', 'ui.sortable'])
         .filter('removeTag', function() {
             return function(input) {
@@ -384,5 +387,9 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     // Calender View End
     // --------------------------------
 
+    //自動更新
+    setInterval(function(){
+        loadTickets();
+    }, AUTO_RELOAD_INTERVALS);
 };
 myapp.controller('controller', TaskCtrl);
