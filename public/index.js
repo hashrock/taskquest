@@ -68,6 +68,9 @@ var ModalInstanceCtrl = function($scope, $modalInstance, card) {
 };
 
 var TaskCtrl = function($scope, $http, $location, $modal, $q) {
+    //編集中は自動更新を防止
+    $scope.isEditing = false;
+
     var oldList, newList, item;
 
     if (!localStorage.user) {
@@ -275,6 +278,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         helper : 'clone', //Prevent extra click event in FF
         connectWith: ".apps-container",
         start: function(event, ui) {
+            $scope.isEditing = true;
             item = ui.item;
             newList = oldList = ui.item.parent();
         },
@@ -293,6 +297,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
                     status: toList
                 }).success(function(){
                     loadBadges();
+                    $scope.isEditing = false;
                 });
             }
         }
@@ -389,7 +394,28 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
 
     //自動更新
     setInterval(function(){
-        loadTickets();
+        var todoAddFocus = false;
+
+        $(".todoAdd").each(function(){
+            //フォーカスが当たっていれば自動更新しない
+            if($(this).is(":focus")){
+                todoAddFocus = true;
+            }
+
+            //すでに文字が入力されていれば自動更新しない
+            if($(this).val().length > 0){
+                todoAddFocus = true;
+            }
+
+            //フォーカスが外れていて文字が入ったまま放置されると
+            //その間ずっと更新されないが…
+            //抜本的な解決策は思いつかないので、現在このまま
+            //そもそも、更新でクリアされてしまうことが問題の主因。何か思いついたら対処
+        });
+
+        if(!$scope.isEditing && !todoAddFocus){
+            loadTickets();
+        }
     }, AUTO_RELOAD_INTERVALS);
 };
 myapp.controller('controller', TaskCtrl);
