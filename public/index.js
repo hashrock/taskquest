@@ -1,4 +1,4 @@
-var AUTO_RELOAD_INTERVALS = 3000;
+var AUTO_RELOAD_INTERVALS = 10000;
 
 
 var myapp = angular.module('myapp', ['ui', 'ui.bootstrap', 'ui.sortable'])
@@ -397,9 +397,20 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         var todoAddFocus = false;
 
         $(".todoAdd").each(function(){
+            //フォーカスが当たっていれば自動更新しない
             if($(this).is(":focus")){
                 todoAddFocus = true;
             }
+
+            //すでに文字が入力されていれば自動更新しない
+            if($(this).val().length > 0){
+                todoAddFocus = true;
+            }
+
+            //フォーカスが外れていて文字が入ったまま放置されると
+            //その間ずっと更新されないが…
+            //抜本的な解決策は思いつかないので、現在このまま
+            //そもそも、更新でクリアされてしまうことが問題の主因。何か思いついたら対処
         });
 
         if(!$scope.isEditing && !todoAddFocus){
